@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cooking Recipes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    *,*::before,*after {
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: var(--cl-3--);
+    }
+
+    body{
+        --cl-1--:#fff;
+        --cl-2--:#000;
+        --cl-3--:#ff7426;
+        --cl-4--:#e7fafe;
+        --cl-5--:linear-gradient(180deg,rgba(231,249,253,0) 0% #e7f9fd 100%);
+        --cl-6--:rgba(0,0,0,0.6);
+        --cl-7--:rgba(0,0,0,0.05);
+        background: var(--cl-1--);
+        margin: 0;
+    }
+    img {
+        max-width: 100%;
+    }
+    h1,h2,h4,h5,h6,p{
+        margin: 0;
+    }
+
+    a{
+        display: inline-block;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+
+    }
+
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .row{
+        display: flex;
+    }
+
+    .column{
+        display: grid;
+    }
+    .container{
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+
+    header{
+        align-items: center;
+        gap: 2em;
+        padding-top:2em;
+        fill: var(--cl-3--);
+    }
+    nav{
+        align-items: center;
+        flex-grow: 1;
+        gap: 2em;
+    }
+    nav ul{
+        align-items: center;
+        gap : 2em;
+    }
+    .primary-links{
+        margin:auto;
+        
+    }
+    nav a {
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--cl-2--);
+    }
+    nav a:hover{
+        color: var(--cl-3--);
+        fill:var(--cl-3--);
+    }
+    .hero{
+        position: relative;
+        margin: 2em 0;
+        fill: var(--cl-2--);
+        
+        
+    }
+    .hero::after, .hero::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 90%;
+        width: 2.5%;
+        background-color: var(--cl-4--);
+    }
+    .hero::after{
+        left: 0;
+        border-radius: 0px 50px 50px 0px;
+        
+    }
+    .hero::before{
+        right: 0;
+        border-radius: 50px 0px 0px 50px;
+    }
+
+    .hero .container{
+        background-image: url("https://images.creativemarket.com/0.1.0/ps/12308345/3640/2410/m1/fpnw/wm1/dsc09723-.jpg?1651057445&s=cd8aafbf3c8cece4dc8aeb89ea019e1a");
+        background-size: cover; 
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden;
+        border-radius: 50px;
+        
+    }
+    .hero-content{
+        padding: 3em;
+        
+    }
+    .recipe{
+        margin: 4em 0em 1em 0em;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: capitalize;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        background: var(--cl-1--);
+        padding: 0.5em;
+        max-width: 135px;
+        box-shadow: 3px 3px 6px var(--cl-6--);
+        border-radius: 30px;
+    }
+    .recipe img{
+        max-width: 30px;
+    }
+    .hero h1{
+        font-weight: 600;
+        font-size: 60px;
+        width: 60%;
+        padding: 0.5em 0;
+
+    }
+
+    p{
+        font-size: 16px;
+        color: var(--cl-6--);
+        margin:2em 0;
+        width: 60%;
+    }
+    .glow-on-hover {
+        font-weight: 600;
+        font-size: 14px;
+        gap: 2em;
+        width: 220px;
+        height: 50px;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #111;
+        cursor: pointer;
+        position: relative;
+        z-index: 0;
+        border-radius: 10px;
+    }
+
+    .glow-on-hover:before {
+        content: '';
+        background: linear-gradient(45deg, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff);
+        position: absolute;
+        top: -2px;
+        left:-2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 10px;
+    }
+
+    .glow-on-hover:active {
+        color: #ff5500
+    }
+
+    .glow-on-hover:active:after {
+        background: transparent;
+    }
+
+    .glow-on-hover:hover:before {
+        opacity: 1;
+    }
+
+    .glow-on-hover:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff4d00;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+    }
+
+    @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+
+    .category{
+        padding: 2em 0;
+    }
+
+    .category-title{
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2em;
+    }
+    h2{
+        font-weight: 600;
+        font-size: 50px;
+    }
+    .category-title a{
+        font-weight: 600;
+        color: var(--cl-2--);
+        font-size: 16px;
+        background: var(--cl-4--);
+        padding: 0.8em 1.5em;
+        border-radius: 15px;
+    }
+    .category-title a:hover{
+        background: var(--cl-3--);
+        color: var(--cl-1--);
+        box-shadow: 3px 3px 6px var(--cl-6--);
+    }
+
+    .category-cards{
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2em;
+        padding: 1em 0;
+
+    }
+
+    .cat-card{
+        text-align: center;
+        padding: 1em 0;
+        
+    }
+    .cat-card img{
+        object-fit: cover;
+        width: 300px;
+        height: 300px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    h6{
+        color:var(--cl-2--);
+        font-size: 15px;
+        margin-top: 1em;
+        box-shadow: #000;
+    }
+    .section-title{
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .section-title h6{
+        font-size: 15px;
+        font-weight: 100;
+        color: var(--cl-6--);
+
+    }
+    .recipes-card{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2em;
+        padding: 2em 0;
+    }
+    .card{
+        position: relative;
+        background: var(--cl-5--);
+        padding: 1em;
+        border-radius: 15px;
+    }
+    .card img{
+        object-fit: cover;
+        width: 280px;
+        height: 200px;
+        border-radius: 15px;
+    }
+    .card h5{
+        color: var(--cl-2--);
+        font-size: 15px;
+        padding-top: 0.5em;
+        max-width: 250px;
+        text-transform: uppercase;
+    }
+    .card .like{
+        position: absolute;
+        top: 7%;
+        right: 7%;
+        color: var(--cl-4--);
+        background: var(--cl-6--);
+        fill: #dbe2e5;
+        padding: 0.5em;
+        box-shadow: 0px 5px 10px rgba(255,99,99,0.2);
+        cursor: pointer;
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+    }
+    .card .like:hover,
+    .like:active {
+        fill: #ff6363;
+    }
+    
+    .contact{
+        min-height: 60vh;
+        background: var(--cl-4--);
+        padding: 50px;
+        text-align: center;
+    }
+    .containerui{
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .containerui h2{
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: var(--cl-2--);
+    }
+    .contact_wrapper{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: 0;
+    }
+    .contact_form{
+        text-align: left;
+    }
+    .contact_form h3{
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--cl-2--);
+    }
+    .form_group{
+        margin-bottom: 20px;
+    }
+    input, textarea{
+        width: 80%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background-color: #f8f9fa;
+    }
+    input:focus, textarea:focus{
+        outline: none;
+        box-shadow: 0 0 8px var(--cl-6--);
+    }
+    button{
+        display: inline-block;
+        padding: 12px 24px;
+        background: var(--cl-3--);
+        color: var(--cl-1--);
+        border: none;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+    button:hover{
+        box-shadow: 0 0 8px var(--cl-6--);
+    }
+    .contact_info{
+        padding-left: 50px;
+        text-align: left;
+    }
+    .contact_info h3{
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--cl-2--);
+    }
+    .contact_info p{
+        margin-bottom: 10px;
+        color: var(--cl-6--);
+    }
+    .contact_info i{
+        color: var(--cl-3--);
+        margin-right: 30px;
+    }
+
+
+</style>
+</head>
+<body>
+    <!--Navigation-->
+    <header class="row container">
+        <a href="./index.html" class="logo">
+            <img src="https://t4.ftcdn.net/jpg/02/76/34/57/360_F_276345740_x6JOz5HZl8w9YoJe3ouLAtFgsKxwZKsN.jpg" alt="Company Logo" width="100px" height="75px" />
+        </a>
+        <div class = "toggleMenu" onclick="toggleMenu();"> </div>
+        <nav class="navigation row">
+            <ul class="primary-links row">
+                <li> <a href ="#">Home</a></li>
+                <li> <a href ="#">Recipes</a></li>
+                <li> <a href ="#">Blog</a></li>
+                <li> <a href ="#">Contact</a></li>
+                <li> <a href ="#">About Us</a></li>
+            </ul>
+            <ul class="secondary-links row">
+                <li>
+                    <a href="#"  title="facebook" > 
+                        <i class="fab fa-facebook "></i>
+                      </a>
+                </li>
+                <li>
+                    <a href="#"  title="instagram"> 
+                        <i class="fab fa-instagram "></i>
+                      </a>
+                </li>
+                <li>
+                    <a href="#"  title="twitter"> 
+                        <i class="fab fa-twitter "></i>
+                      </a>
+                </li>
+                <li>
+                    <a href="#"  title="youtube" > 
+                        <i class="fab fa-youtube "></i>
+                      </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!--End Navigation-->
+
+    <!--Hero Section-->
+    <section class="hero">
+        <div class="container row">
+            <div class="hero-content">
+                <div class="content">
+                    <div class="recipe row"> <img src= "https://static.vecteezy.com/system/resources/thumbnails/020/278/048/small/book-icon-vector.jpg" alt="">Hot Recipes</div>
+                        <h1>Discover Culinary Delights: A World of Recipes Await!</h1>
+                        <p>Keep it easy with these simple but delicious recipes. From make-ahead lunches and midweek meals to fuss-free sides and moreish cakes, we've got everything.</p>
+                        <button class="glow-on-hover" type="button">View Recipes
+                            <i class="fas fa-square-caret-right"></i>
+                        </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Hero Section-->
+
+    <!--category-->
+    <section class="category container">
+        <div class="category-title row">
+            <h2>Categories</h2>
+            <a href="#" class="category_btn">View All Categories</a>
+        </div>
+        <div class="category-cards column">
+            <a href="#" class = "cat-card">
+                <img src="https://pinchofyum.com/wp-content/uploads/Dynamite-Plant-Power-Sushi-Bowl-2-2-800x800.jpeg" alt="">
+                <h6>VEGAN RECIPES</h6>
+            </a>
+            <a href="#" class = "cat-card">
+                <img src="https://hips.hearstapps.com/hmg-prod/images/air-fryer-buffalo-cauliflower-copy-1648138812.jpeg?crop=0.716xw:1.00xh;0.178xw,0&resize=640:*" alt="">
+                <h6>SNACKS RECIPES</h6>
+            </a>
+            <a href="#" class = "cat-card">
+                <img src="https://www.licious.in/blog/wp-content/uploads/2022/11/Shutterstock_1820896124-600x600.jpg" alt="">
+                <h6>KETO RECIPES</h6>
+            </a>
+            <a href="#" class = "cat-card">
+                <img src="https://www.tasteofhome.com/wp-content/uploads/2018/01/exps21585_THCA153054D10_15_4b.jpg" alt="">
+                <h6>DESSERT RECIPES</h6>
+            </a>
+            <a href="#" class = "cat-card">
+                <img src="https://fromnoorskitchen.files.wordpress.com/2020/11/jalapeno-poppers-with-lamb-kheema-noorsrecipes.jpeg" alt="">
+                <h6>NON VEGETARIAN RECIPES</h6>
+            </a>
+            <a href="#" class = "cat-card">
+                <img src="https://www.cookwithnabeela.com/wp-content/uploads/2023/09/PotatoPancakes-1.webp" alt="">
+                <h6>STARCH RECIPES</h6>
+            </a>
+        </div>
+    </section>
+    <!--end category-->
+
+    <!--recipes-->
+    <section class="recipes container">
+        <div class="section-title">
+            <h2>Simple and tasty recipes</h2>
+            <h6>Embark on a Gastronomic Odyssey with Our Exquisite Recipe Categories. A Culinary Tapestry Woven With Love, Crafted for Every Palate and Occasion</h6>
+        </div>
+        <div class="recipes-card">
+            <a href="1.html" class="card">
+                <img src="https://www.dailyfoodrecipes.com/wp-content/uploads/2013/09/Malay-Pickle-Sri-Lankan-Style.jpg" alt ="">
+                <h5>HOW TO MAKE ONION ACHCHARU IN JAFFNA | JAFFNA STYLE</h5>
+                <div class="like row">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </a>
+            <a href="2.html" class="card">
+                <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2015/03/fish-fry-1.jpg" alt ="">
+                <h5>SIMPLE DEEP FRY FISH RECIPE WITHOUT EGG, FLOUR, BREADING</h5>
+                <div class="like row">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </a>
+            <a href="3.html" class="card">
+                <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/07/rava-kesari-recipe.jpg" alt ="">
+                <h5>BEST RAVA KESARI RECIPE WITHOUT MILK | EASY & TASTY SWEET</h5>
+                <div class="like row">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </a>
+            <a href="4.html" class="card">
+                <img src="https://cooksimply.co.uk/wp-content/uploads/2021/09/prawn-noodle-stir-fry-cook-simply.jpg" alt ="">
+                <h5>PRAWN FRIED NOODLES RECIPE | BEST FRIED SHRIMP NOODLES</h5>
+                <div class="like row">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </a>
+            <a href="5.html" class="card">
+                <img src="https://www.topsrilankanrecipe.com/wp-content/uploads/2019/08/19a.jpg" alt ="">
+                <h5>HOW TO MAKE PAYATHAM PANIYARAM URUNDAI WITH JAGGERY | JAFFNA STYLE</h5>
+                <div class="like row">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </a>
+        </div>
+    </section>
+    <!--end recipes-->
+
+    <!--Contact-->
+    <section class="contact">
+        <div class="containerui">
+            <h2>Contact Us</h2>
+            <div class="contact_wrapper">
+                <div class="contact_info">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-phone"></i>+94 771-234-789</p>
+                    <p><i class="fas fa-envelope"></i>info@recipes.lk</p>
+                    <p><i class="fas fa-map-marker-alt"></i>123 street, Moratuwa</p>
+                </div>
+                <div class="contact_form">
+                    <h3>Send us a message</h3>
+                    <form>
+                        <div class="form_group">
+                            <input type="text" name="name" placeholder="Your name">
+                        </div>
+                        <div class="form_group">
+                            <input type="email" name="email" placeholder="Your Email">
+                        </div>
+                        <div class="form_group">
+                            <textarea name="message" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--end Contact-->
+</body>
+</html>
